@@ -1,7 +1,7 @@
-<body class="vh-100">
-    <main class="vh-100 d-flex flex-row align-items-center justify-content-center">
+<body class="min-vh-100">
+    <main class="d-flex flex-row min-vh-100">
         <section
-            class="h-100 d-flex flex-column align-items-center justify-content-center col-5">
+            class="d-flex flex-column align-items-center justify-content-center col-5 py-5">
             <img src="/assets/logo-2.svg">
             <h2 style="margin-bottom: 45px;"> {{title}} </h2>
             <ng-content></ng-content>
@@ -31,7 +31,7 @@
             </div>
         </section>
         <section
-            class="h-100 d-flex flex-column align-items-center justify-content-center gap-2 flex-grow-1 text-bg-dark">
+            class="d-none d-lg-flex flex-column align-items-center justify-content-center flex-grow-1 text-bg-dark">
             <h1 class="fs-20 fw-bold">Study AI</h1>
             <img src="/assets/logo.svg" class="w-50" style="margin-bottom: 30px;">
         </section>
