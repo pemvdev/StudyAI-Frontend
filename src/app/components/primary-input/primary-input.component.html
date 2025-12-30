@@ -1,0 +1,19 @@
+<div class="mb-3">
+  <label [for]="inputName" class="form-label fs-16">{{label}}</label>
+  
+  <div class="input-group mb-10">
+    <span class="input-group-text bg-primary border-0 text-white" 
+          style="border-radius: 8px 0 0 8px; padding: 0 15px;">
+          <ng-content></ng-content>
+    </span>
+
+    <input 
+      class="form-control bg-dark-subtle border-0" 
+      style="border-radius: 0 8px 8px 0; padding: 12px 20px;"
+      [type]="type"
+      [placeholder]="placeholder"
+      [value]="value"
+      (input)="onInput($event)">
+      
+  </div>
+</div>

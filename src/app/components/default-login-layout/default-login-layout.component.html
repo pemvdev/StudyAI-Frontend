@@ -1,0 +1,39 @@
+<body class="vh-100">
+    <main class="vh-100 d-flex flex-row align-items-center justify-content-center">
+        <section
+            class="h-100 d-flex flex-column align-items-center justify-content-center col-5">
+            <img src="/assets/logo-2.svg">
+            <h2 style="margin-bottom: 45px;"> {{title}} </h2>
+            <ng-content></ng-content>
+            <div style="gap: 30px; text-transform: uppercase;" class="d-flex flex-column align-items-center justify-content-center w-100 fs-12">
+                <button 
+                style="padding: 12px 24px; cursor: pointer;
+                box-shadow: 0px 8px 12px rgba(66, 141, 255, 0.2);
+                &disabled {
+                    opacity: 0.8;
+                }"
+                    class="btn btn-primary w-75 rounded-3 fs-16 fw-medium border-0 bg-primary text-white"
+                    (click)="submit()"
+                    [disabled]="disablePrimaryBtn"
+                    > 
+                    {{primaryBtnText}}
+                </button>
+                <div style= "gap: 20px;"
+                 class="d-flex flex-row align-items-center justify-content-center fs-14 text-secondary fw-normal w-100 px-5">
+                    <div style= "flex-grow: 1; background-color: #dee2e6;" class="h-2"></div>
+                    <span>or</span>
+                    <div style= "flex-grow: 1; background-color: #dee2e6f3;" class="h-2"></div>
+                </div>
+                <button style="padding: 12px 24px; cursor: pointer"
+                    class="w-75 rounded-3 fs-16 fw-medium border-1 bg-transparent text-primary"
+                    (click)="navigate()"> {{secondaryBtnText}}
+                </button>
+            </div>
+        </section>
+        <section
+            class="h-100 d-flex flex-column align-items-center justify-content-center gap-2 flex-grow-1 text-bg-dark">
+            <h1 class="fs-20 fw-bold">Study AI</h1>
+            <img src="/assets/logo.svg" class="w-50" style="margin-bottom: 30px;">
+        </section>
+    </main>
+</body>
