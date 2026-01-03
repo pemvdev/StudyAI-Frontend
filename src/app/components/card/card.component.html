@@ -1,0 +1,17 @@
+<div
+  class="card h-100 shadow-sm transition"
+  [class.cursor-pointer]="clickable"
+  [class.shadow]="hovered"
+  (mouseenter)="hovered = true"
+  (mouseleave)="hovered = false"
+  (click)="handleClick()">
+
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="card-footer bg-transparent border-0 pt-0">
+    <ng-content select="[card-footer]"></ng-content>
+  </div>
+
+</div>
