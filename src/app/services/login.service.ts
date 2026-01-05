@@ -7,6 +7,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 interface LoginResponse {
   token: string;
   name: string;
+  email: string;
 }
 
 @Injectable({
@@ -31,7 +32,16 @@ export class LoginService {
       tap((value) => {
         sessionStorage.setItem("auth-token", value.token);
         sessionStorage.setItem("username", value.name);
+        sessionStorage.setItem("email", value.email);
       })
     );
   }
+
+  getUserName(): string | null {
+  return sessionStorage.getItem("username");
+}
+
+isLoggedIn(): boolean {
+  return !!sessionStorage.getItem("auth-token");
+}
 }

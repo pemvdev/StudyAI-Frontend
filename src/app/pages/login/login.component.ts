@@ -14,20 +14,18 @@ import { ToastrService } from 'ngx-toastr';
     ReactiveFormsModule,
     PrimaryInputComponent
   ],
-  // Note: You usually don't need to provide Router here; it's provided globally.
-  // Only provide LoginService if you want a fresh instance for this component.
+ 
   providers: [LoginService], 
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  // Use the 'new' keyword here or in ngOnInit
+
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  // Constructor must use parentheses () and then curly braces {}
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -38,7 +36,7 @@ export class LoginComponent {
     this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
       next: () => {
         this.toastrService.success("You're now logged in!"),
-        this.navigate(); // Navigate on success
+        this.router.navigate(["home"]);
       },
       error: (err) => this.toastrService.error("Try again later...")
     });

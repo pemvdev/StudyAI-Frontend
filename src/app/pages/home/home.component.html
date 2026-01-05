@@ -28,6 +28,20 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4">
+      <app-card [clickable]="true"
+                route="classrooms">
+        <h5 class="card-title fw-semibold">Classrooms / Subjects</h5>
+        <p class="card-text text-muted">
+          4 subjects<br>
+          Algorithms, Databases, Java, English
+        </p>
+        <div card-footer class="text-primary fw-semibold">
+          Go to Classrooms →
+        </div>
+      </app-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
       <app-card [clickable]="true" route="progress">
         <h5 class="card-title fw-semibold">See Your Progress</h5>
         <p class="card-text text-muted">
@@ -37,19 +51,6 @@
         </p>
         <div card-footer class="text-primary fw-semibold">
           Go to Progress →
-        </div>
-      </app-card>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-4">
-      <app-card [clickable]="true">
-        <h5 class="card-title fw-semibold">Classrooms / Subjects</h5>
-        <p class="card-text text-muted">
-          4 subjects<br>
-          Algorithms, Databases, Java, English
-        </p>
-        <div card-footer class="text-primary fw-semibold">
-          Go to Classrooms →
         </div>
       </app-card>
     </div>

@@ -37,7 +37,6 @@ export class SignupComponent {
 
   });
 
-  // Constructor must use parentheses () and then curly braces {}
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -45,10 +44,10 @@ export class SignupComponent {
   ) {}
 
   submit() {
-    this.loginService.signup(this.signupForm.value.email, this.signupForm.value.email, this.signupForm.value.password).subscribe({
+    this.loginService.signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password).subscribe({
       next: () => {
         this.toastrService.success("You're now logged in!"),
-        this.navigate();
+        this.router.navigate(["home"]);
       },
       error: (err) => this.toastrService.error("Try again later...")
     });
