@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Classrooms</h2>
+  <button class="btn btn-primary" (click)="openCreateModal()">+ New Classroom</button>
+</div>
+
+<div class="row g-3">
+  <div class="col-12 col-md-6 col-lg-4" *ngFor="let classroom of classrooms">
+    <app-classroom-card
+      [id]="classroom.id"
+      [name]="classroom.name"
+      [description]="classroom.description"
+      [dateOfCreation]="classroom.dateOfCreation"
+      (edit)="openEditModal($event)"
+      (delete)="handleDelete($event)">
+    </app-classroom-card>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade show d-block" [class.show]="showCreateModal" *ngIf="showCreateModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ isEditMode ?  'Edit Classroom' : 'Create Classroom' }}</h5>
+        <button type="button" class="btn-close" (click)="hideCreateClassroomModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form #createForm="ngForm" (ngSubmit)="handleSaveClassroom()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text"
+             id="name"
+              name="name" 
+              class="form-control"
+               [(ngModel)] = 'form.name'>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description"
+             name="description" 
+             class="form-control"
+              [(ngModel)]= 'form.description'></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">{{ isEditMode ? 'Save Changes' : 'Create' }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

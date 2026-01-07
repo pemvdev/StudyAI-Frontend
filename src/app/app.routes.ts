@@ -4,6 +4,7 @@ import { SignupComponent } from './pages/signup/signup';
 import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './guards/auth.guard';
 import { ClassroomComponent } from './components/classroom/classroom.component';
+import { ClassroomPageComponent } from './pages/classroom-page/classroom-page.component';
 
 export const routes: Routes = [
     {
@@ -30,7 +31,7 @@ export const routes: Routes = [
     },
     {
         path: "classrooms",
-        component: ClassroomComponent,
+        component: ClassroomPageComponent,
         canActivate: [authGuard] 
     },
 
