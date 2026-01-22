@@ -4,6 +4,8 @@ import { ClassroomComponent } from "../../components/classroom/classroom.compone
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { SubjectComponent } from '../../components/subject/subject.component';
+import { SubjectService } from '../../services/subject.service';
 
 @Component({
   selector: 'app-classroom-page',
@@ -15,16 +17,20 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
 export class ClassroomPageComponent implements OnInit {
 
   classrooms: any[] = [];
+  subjects: any[] = [];
   showCreateModal = false;
   isEditMode = false;
   selectedClassroom: any = null;
+  isAddSubjectModalOpen = false;
 
   form = {
     name: '',
     description: ''
   };
 
-  constructor(private classroomService: ClassroomService) { }
+  constructor(private classroomService: ClassroomService,
+    private subjectService: SubjectService
+  ) { }
 
   ngOnInit() {
     this.loadClassrooms();
@@ -36,6 +42,14 @@ export class ClassroomPageComponent implements OnInit {
       error: (err) => console.error('Error loading classrooms', err)
     });
   }
+
+  loadSubjects(classroomId: number) {
+  this.subjectService.getSubjectsByClassroom(classroomId).subscribe({
+    next: data => this.subjects = data,
+    error: err => console.error('Error loading subjects', err)
+  });
+}
+
 
   openCreateModal() {
     this.isEditMode = false;
@@ -97,4 +111,12 @@ export class ClassroomPageComponent implements OnInit {
       });
     }
   }
+  openAddSubjectModal() {
+  this.isAddSubjectModalOpen = true;
+}
+
+closeAddSubjectModal() {
+  this.isAddSubjectModalOpen = false;
+}
+
 }

@@ -8,6 +8,7 @@ interface LoginResponse {
   token: string;
   name: string;
   email: string;
+  id: string;
 }
 
 @Injectable({
@@ -23,6 +24,8 @@ export class LoginService {
       tap((value) => {
         sessionStorage.setItem("auth-token", value.token);
         sessionStorage.setItem("username", value.name);
+        sessionStorage.setItem("id", value.id);
+        
       })
     );
   }

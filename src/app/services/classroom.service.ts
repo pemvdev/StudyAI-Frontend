@@ -13,8 +13,9 @@ export class ClassroomService {
   constructor(private http: HttpClient) {}
 
   getClassrooms(): Observable<Classroom[]> {
-    return this.http.get<Classroom[]>(this.apiUrl);
-  }
+  return this.http.get<Classroom[]>(`${this.apiUrl}/user`);
+}
+
 
   createClassroom(data: any) {
     return this.http.post(this.apiUrl, data);

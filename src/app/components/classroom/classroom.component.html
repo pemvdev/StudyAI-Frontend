@@ -1,43 +1,91 @@
-<div class="card h-100 shadow-sm classroom-card"
-     (click)="toggleExpand()">
+<div class="card classroom-card" (click)="toggleExpand()">
 
   <div class="card-body">
-    <div class="d-flex justify-content-between align-items-start">
+
+    <!-- HEADER -->
+    <div class="classroom-header">
       <div>
-        <h5 class="card-title">{{ name }}</h5>
-        <p class="card-text text-muted">
+        <h5 class="classroom-title">{{ name }}</h5>
+        <p class="classroom-description">
           {{ description || 'No description' }}
         </p>
       </div>
 
-      <div class="dropdown">
-        <button class="btn btn-sm btn-light"
-                data-bs-toggle="dropdown"
-                (click)="$event.stopPropagation()">
-          ⋮
+      <div class="classroom-actions">
+        <button
+          class="btn btn-sm btn-light"
+          (click)="onEdit($event)">
+          Edit
         </button>
 
-        <ul class="dropdown-menu">
-          <li>
-            <button class="dropdown-item" (click)="onEdit($event)">
-              Edit
-            </button>
-          </li>
-          <li>
-            <button class="dropdown-item text-danger" (click)="onDelete($event)">
-              Delete
-            </button>
-          </li>
-        </ul>
+        <button
+          class="btn btn-sm btn-light text-danger"
+          (click)="onDelete($event)">
+          Delete
+        </button>
       </div>
     </div>
 
     <small class="text-muted">
-      Created at: {{ dateOfCreation | date:'medium' }}
+      Created at: {{ dateOfCreation | date:'mediumDate' }}
     </small>
 
-    <div *ngIf="expanded" class="mt-3 border-top pt-2 text-muted">
-      Subjects and topics will appear here later
+
+
+   <div *ngIf="expanded" class="subjects-section">
+
+  <div class="subjects-header">
+    <strong>Subjects</strong>
+
+    <button
+      class="btn btn-sm btn-outline-primary"
+      (click)="addSubject($event)">
+      + Add
+    </button>
+  </div>
+
+  <div *ngFor="let subject of subjects" class="mt-2">
+    <app-subject
+      [id]="subject.id"
+      [name]="subject.name"
+      (edit)="onEditSubject($event)"
+      (delete)="onDeleteSubject($event)">
+    </app-subject>
+  </div>
+
+  <div *ngIf="subjects.length === 0" class="empty-state">
+    No subjects yet.
+  </div>
+
+</div>
+
+<!-- CREATE SUBJECT MODAL -->
+<div class="modal fade show d-block" *ngIf="showCreateSubjectModal">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Create Subject</h5>
+        <button type="button" class="btn-close" (click)="closeSubjectModal()">
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form #subjectFormRef="ngForm" (ngSubmit)="saveSubject()">
+
+          <div class="mb-3">
+            <label class="form-label">Subject name</label>
+            <input type="text" class="form-control" name="name" required [(ngModel)]="subjectForm.name">
+          </div>
+
+          <button type="submit" class="btn btn-primary" [disabled]="!subjectFormRef.valid">
+            Create
+          </button>
+
+        </form>
+      </div>
+
     </div>
   </div>
 </div>

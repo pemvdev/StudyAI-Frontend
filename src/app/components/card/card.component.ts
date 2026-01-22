@@ -1,36 +1,37 @@
 import { Component, Input } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
 
 export class CardComponent {
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
   hovered = false;
   hasFooter = false;
   @Input() route?: string;
-  @Input() clickable = false;  
+  @Input() clickable = false;
 
-  ngAfterContentInit(){
+  ngAfterContentInit() {
     this.hasFooter = true;
   }
 
-handleClick() {
-  if (this.clickable && this.route) {
-    this.router.navigate([this.route])
+  handleClick() {
+    if (this.clickable && this.route) {
+      this.router.navigate([this.route])
+    }
   }
-}
 
-showFooter(){
+  showFooter() {
 
-}
+  }
 
 
 }

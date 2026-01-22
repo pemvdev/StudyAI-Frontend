@@ -1,0 +1,18 @@
+.subject-card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  transition: background-color 0.15s ease;
+}
+
+.subject-card:hover {
+  background-color: #f9fafb;
+}
+
+.subject-card .btn-light {
+  border: none;
+  background: transparent;
+}
+
+.subject-card .dropdown-menu {
+  border-radius: 10px;
+}

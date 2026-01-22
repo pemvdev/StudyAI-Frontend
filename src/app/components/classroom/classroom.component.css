@@ -1,0 +1,61 @@
+.classroom-card {
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+
+.classroom-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.classroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.classroom-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.classroom-description {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.classroom-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.classroom-actions button {
+  border-radius: 8px;
+}
+
+.subjects-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.subjects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state {
+  font-size: 0.85rem;
+  color: #999;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+
+
