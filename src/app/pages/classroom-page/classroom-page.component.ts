@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassroomService } from '../../services/classroom.service';
-import { ClassroomComponent } from "../../components/classroom/classroom.component";
+import { ClassroomComponent } from "../../components/classroom/classrooms.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
@@ -8,13 +8,13 @@ import { SubjectComponent } from '../../components/subject/subject.component';
 import { SubjectService } from '../../services/subject.service';
 
 @Component({
-  selector: 'app-classroom-page',
+  selector: 'app-classrooms-page',
   standalone: true,
   imports: [ClassroomComponent, CommonModule, FormsModule, NavbarComponent],
   templateUrl: './classroom-page.component.html',
   styleUrls: ['./classroom-page.component.css']
 })
-export class ClassroomPageComponent implements OnInit {
+export class ClassroomsPageComponent implements OnInit {
 
   classrooms: any[] = [];
   subjects: any[] = [];

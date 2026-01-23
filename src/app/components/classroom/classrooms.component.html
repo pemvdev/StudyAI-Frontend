@@ -1,0 +1,27 @@
+<div class="card classroom-card" (click)="goToClassroom()">
+
+  <div class="card-body">
+
+    <!-- HEADER -->
+    <div class="classroom-header">
+      <div>
+        <h5 class="classroom-title">{{ name }}</h5>
+        <p class="classroom-description">
+          {{ description || 'No description' }}
+        </p>
+      </div>
+
+      <div class="classroom-actions">
+        <button class="btn btn-sm btn-light" (click)="onEdit($event)">
+          Edit
+        </button>
+
+        <button class="btn btn-sm btn-light text-danger" (click)="onDelete($event)">
+          Delete
+        </button>
+      </div>
+    </div>
+
+    <small class="text-muted">
+      Created at: {{ dateOfCreation | date:'mediumDate' }}
+    </small>

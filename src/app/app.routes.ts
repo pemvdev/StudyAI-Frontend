@@ -3,8 +3,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup';
 import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './guards/auth.guard';
-import { ClassroomComponent } from './components/classroom/classroom.component';
-import { ClassroomPageComponent } from './pages/classroom-page/classroom-page.component';
+import { ClassroomComponent } from './components/classroom/classrooms.component';
+import { ClassroomsPageComponent } from './pages/classroom-page/classroom-page.component';
+import { ClassroomSpecificPageComponent } from './pages/classroom-specific-page/classroom-specific-page.component';
 
 export const routes: Routes = [
     {
@@ -31,9 +32,16 @@ export const routes: Routes = [
     },
     {
         path: "classrooms",
-        component: ClassroomPageComponent,
+        component: ClassroomsPageComponent,
         canActivate: [authGuard] 
+        //Where all the classrooms are listed
     },
+    {
+        path: "classrooms/:id",
+        component: ClassroomSpecificPageComponent,
+        canActivate: [authGuard] 
+        //Page specifi to the classroom selected (Subjects and Topics listed here)
+    }
 
     // {
     //     path: "quizz",

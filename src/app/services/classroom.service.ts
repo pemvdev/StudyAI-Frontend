@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Classroom } from '../components/classroom/classroom.model';
+import { Classroom } from '../components/classroom/classrooms.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +31,8 @@ export class ClassroomService {
   deleteClassroom(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  getById(id: number) {
+  return this.http.get<Classroom>(`${this.apiUrl}/${id}`);
+}
 }

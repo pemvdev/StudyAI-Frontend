@@ -23,9 +23,20 @@ export class SubjectService {
     );
   }
 
+  updateSubject(
+  classroomId: number,
+  subjectId: number,
+  data: { name: string }
+) {
+  return this.http.put(
+    `${this.baseUrl}/${classroomId}/subjects/${subjectId}`,
+    data
+  );
+}
+
   deleteSubject(classroomId: number, subjectId: number) {
-    return this.http.delete(
-      `${this.baseUrl}/${classroomId}/subjects/${subjectId}`
-    );
-  }
+  return this.http.delete(
+    `${this.baseUrl}/${classroomId}/subjects/${subjectId}`
+  );
+}
 }
