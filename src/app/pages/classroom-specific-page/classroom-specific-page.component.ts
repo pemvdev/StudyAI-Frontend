@@ -1,16 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { SubjectComponent } from '../../components/subject/subject.component';
 import { Classroom } from '../../components/classroom/classrooms.model';
 import { Subject } from '../../components/subject/subject.model';
 import { SubjectService } from '../../services/subject.service';
 import { ClassroomService } from '../../services/classroom.service';
 import { CommonModule } from '@angular/common';
-
-
-
 
 @Component({
   selector: 'app-classroom-specific-page',
@@ -24,7 +20,8 @@ export class ClassroomSpecificPageComponent {
   constructor(
     private classroomService: ClassroomService,
     private subjectService: SubjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   id!: number;
@@ -36,11 +33,34 @@ export class ClassroomSpecificPageComponent {
   subjectsLoaded = false;
   editingSubjectId: number | null = null;
   isEditMode = false;
+  isEditModeClass = false;
+  showCreateModal = false;
+  selectedClassroom: any = null;
+
+
+  form = {
+    name: '',
+    description: ''
+    };
+
 
   ngOnInit() {
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+   
+    this.route.paramMap.subscribe(params => {
+    const id = params.get('id');
+
+    if (!id) {
+      console.error('Missing id in route');
+      return;
+    }
+
+    this.id = Number(id);
+
+    console.log('Loaded classroomId:', this.id);
+
     this.loadClassroom();
     this.loadSubjects();
+  });
   }
 
 
@@ -88,15 +108,11 @@ resetModal() {
 
 
   loadClassroom() {
-  this.classroomService.getById(this.id).subscribe({
-    next: data => {
-      console.log('SINGLE CLASSROOM:', data);
-      this.classroom = data;
-    },
-    error: err => console.error(err)
-  });
-}
-
+    this.classroomService.getById(this.id).subscribe({
+      next: (data) => this.classroom = data,
+      error: (err) => console.error('Error loading classrooms', err)
+    });
+  }
 
   loadSubjects() {
     this.subjectService.getSubjectsByClassroom(this.id).subscribe({
@@ -115,9 +131,9 @@ resetModal() {
   this.showCreateSubjectModal = true;
 }
 
-  onSubjectOpen(subjectId: number) {
-    console.log('Open subject', subjectId);
-  }
+  // onSubjectOpen(subjectId: number) {
+  //   this.route.navigate(['/classrooms', this.id, '/subjects', subjectId, '/topics']);
+  // }
 
  onEditSubject(subject: Subject) {
   this.editingSubjectId = subject.id;
@@ -135,6 +151,49 @@ resetModal() {
     error: err => console.error('Error deleting subject', err)
   });
 }
+
+openEditModalClassroom(classroom: any) {
+    this.isEditModeClass = true;
+    this.selectedClassroom = classroom;
+    this.form = {
+      name: classroom.name,
+      description: classroom.description
+    };
+    this.showCreateModal = true;
+  }
+
+   handleDelete(id: number) {
+    if (confirm('Are you sure?')) {
+      this.classroomService.deleteClassroom(id).subscribe({
+        next: () => this.router.navigate(['/classrooms']),
+        error: (err) => console.error('Error deleting classroom:', err)
+      });
+    }
+
+  }
+  hideCreateClassroomModal() {
+    this.showCreateModal = false;
+  }
+
+  handleSaveClassroom() {
+    if (this.isEditModeClass && this.selectedClassroom && this.selectedClassroom.id) {
+      this.classroomService.updateClassroom(this.selectedClassroom.id, this.form).subscribe({
+        next: () => {
+          this.showCreateModal = false;
+          this.loadClassroom();
+        },
+        error: (err) => console.error('Erro no Update:', err)
+      });
+    } else {
+      this.classroomService.createClassroom(this.form).subscribe({
+        next: () => {
+          this.showCreateModal = false;
+          this.loadClassroom();
+        },
+        error: (err) => console.error('Erro no Create:', err)
+      });
+    }
+  }
 
 
 }

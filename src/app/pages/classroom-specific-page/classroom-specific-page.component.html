@@ -3,19 +3,38 @@
 <div class="container mt-4">
 
     <!-- CLASSROOM HEADER -->
-    <div class="mb-4">
-        <h1 class="fw-bold mb-1">
-            {{ classroom?.name }}
-        </h1>
+    <div class="classroom-header mb-4" *ngIf="classroom as c">
 
-        <p class="text-muted mb-2">
-            {{ classroom?.description || 'No description' }}
-        </p>
+        <img class="header-image" src="https://picsum.photos/1200/300" alt="Classroom banner" />
 
-        <small class="text-muted">
-            Created at {{ classroom?.dateOfCreation }}
-        </small>
+        <div class="header-overlay d-flex align-items-center">
+            <h1 class="fw-bold mb-0 me-3 text-white">
+                {{ c?.name }}
+            </h1>
+
+            <button class="btn btn-sm btn-primary me-2" (click)="openEditModalClassroom(classroom)">
+                <i class="bi bi-pencil"></i>
+            </button>
+
+            <button class="btn btn-sm btn-danger me-2" (click)="handleDelete(c.id)">
+                <i class="bi bi-trash"></i>
+            </button>
+
+            <button class="btn btn-sm btn-secondary me-2">
+                <i class="bi bi-gear"></i>
+            </button>
+        </div>
+
     </div>
+
+    <p class="text-muted mb-2">
+        {{ classroom?.description || 'No description' }}
+    </p>
+
+    <small class="text-muted">
+        Created at {{ classroom?.dateOfCreation | date: 'mediumDate' }}
+    </small>
+
 
     <hr />
 
@@ -33,7 +52,7 @@
         <div class="row g-3">
 
             <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let subject of subjects">
-                <div class="card h-100 shadow-sm subject-card" role="button" (click)="onSubjectOpen(subject.id)">
+                <div class="card h-100 shadow-sm subject-card" role="button" (click)="'onSubjectOpen(subject.id)'">
                     <div class="card-body">
                         <h5 class="card-title mb-1">
                             {{ subject.name }}
@@ -45,7 +64,7 @@
                     </div>
 
                     <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2">
-                        <button class="btn btn-sm btn-outline-secondary"
+                        <button class="btn btn-sm btn-outline-primary"
                             (click)="onEditSubject(subject); $event.stopPropagation()">
                             Edit
                         </button>
@@ -85,4 +104,37 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade show d-block" [class.show]="showCreateModal" *ngIf="showCreateModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ isEditMode ?  'Edit Classroom' : 'Create Classroom' }}</h5>
+        <button type="button" class="btn-close" (click)="hideCreateClassroomModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form #createForm="ngForm" (ngSubmit)="handleSaveClassroom()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text"
+             id="name"
+              name="name" 
+              class="form-control"
+               [(ngModel)] = 'form.name'>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description"
+             name="description" 
+             class="form-control"
+              [(ngModel)]= 'form.description'></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">{{ isEditMode ? 'Save Changes' : 'Create' }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
