@@ -29,6 +29,7 @@ export class ClassroomSpecificPageComponent {
   classroom?: Classroom;
   subjects: Subject[] = [];
   
+  
   showCreateSubjectModal = false;
   subjectsLoaded = false;
   editingSubjectId: number | null = null;
@@ -131,9 +132,9 @@ resetModal() {
   this.showCreateSubjectModal = true;
 }
 
-  // onSubjectOpen(subjectId: number) {
-  //   this.route.navigate(['/classrooms', this.id, '/subjects', subjectId, '/topics']);
-  // }
+  onSubjectOpen(subjectId: number) {
+    this.router.navigate(['/classrooms', this.id, 'subjects', subjectId]);
+  }
 
  onEditSubject(subject: Subject) {
   this.editingSubjectId = subject.id;

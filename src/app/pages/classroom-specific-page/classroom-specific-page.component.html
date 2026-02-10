@@ -52,7 +52,7 @@
         <div class="row g-3">
 
             <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let subject of subjects">
-                <div class="card h-100 shadow-sm subject-card" role="button" (click)="'onSubjectOpen(subject.id)'">
+                <div class="card h-100 shadow-sm subject-card" role="button" (click)="onSubjectOpen(subject.id)">
                     <div class="card-body">
                         <h5 class="card-title mb-1">
                             {{ subject.name }}
@@ -112,7 +112,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{ isEditMode ?  'Edit Classroom' : 'Create Classroom' }}</h5>
+        <h5 class="modal-title">{{ isEditModeClass ?  'Edit Classroom' : 'Create Classroom' }}</h5>
         <button type="button" class="btn-close" (click)="hideCreateClassroomModal()"></button>
       </div>
       <div class="modal-body">
@@ -132,7 +132,7 @@
              class="form-control"
               [(ngModel)]= 'form.description'></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">{{ isEditMode ? 'Save Changes' : 'Create' }}</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">{{ isEditModeClass ? 'Save Changes' : 'Create' }}</button>
         </form>
       </div>
     </div>

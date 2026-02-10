@@ -6,6 +6,8 @@ import { authGuard } from './guards/auth.guard';
 import { ClassroomComponent } from './components/classroom/classrooms.component';
 import { ClassroomsPageComponent } from './pages/classroom-page/classroom-page.component';
 import { ClassroomSpecificPageComponent } from './pages/classroom-specific-page/classroom-specific-page.component';
+import { Component } from '@angular/core';
+import { SubjectPageComponent } from './pages/subject-page/subject-page.component';
 
 export const routes: Routes = [
     {
@@ -41,8 +43,16 @@ export const routes: Routes = [
         component: ClassroomSpecificPageComponent,
         canActivate: [authGuard] 
         //Page specifi to the classroom selected (Subjects and Topics listed here)
-    }
+    },
+    {
 
+        path: "classrooms/:id/subjects/:subjectId",
+        component: SubjectPageComponent,
+        canActivate: [authGuard] 
+        //Page specific to the subject selected (Topics listed here)
+    },
+    
+    
     // {
     //     path: "quizz",
     //     //component:,
