@@ -57,7 +57,6 @@ export class ClassroomSpecificPageComponent {
 
     this.id = Number(id);
 
-    console.log('Loaded classroomId:', this.id);
 
     this.loadClassroom();
     this.loadSubjects();

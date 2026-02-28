@@ -23,6 +23,12 @@ export class SubjectService {
     );
   }
 
+  getSubjectByClassroom(classroomId: number, subjectId: number): Observable<Subject> {
+    return this.http.get<Subject>(
+      `${this.baseUrl}/${classroomId}/subjects/${subjectId}`
+    );
+  }
+
   updateSubject(
   classroomId: number,
   subjectId: number,

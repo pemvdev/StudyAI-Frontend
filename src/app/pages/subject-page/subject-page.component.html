@@ -1,1 +1,81 @@
 <app-navbar></app-navbar>
+
+<!-- TOPICS SECTION -->
+<section class="topics-section mt-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-semibold mb-0">{{ subject?.name }}</h4>
+
+    <button class="btn btn-sm btn-outline-primary" (click)="addTopic($event)">
+      + Add Topic
+    </button>
+  </div>
+
+  <div class="row g-3">
+
+    <div *ngIf="topics.length === 0" class="col-12 text-center text-muted py-5">
+      No topics yet.
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let topic of topics">
+      <div class="card h-100 shadow-sm topic-card">
+        <div class="card-body">
+          <h5 class="card-title mb-1">
+            {{ topic.name }}
+          </h5>
+
+          <p class="card-text text-muted small mb-0 content-preview">
+            {{ topic.content }}
+          </p>
+        </div>
+
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2">
+          <button class="btn btn-sm btn-outline-primary" (click)="onEditTopic(topic)">
+            Edit
+          </button>
+
+          <button class="btn btn-sm btn-outline-danger" (click)="onDeleteTopic(topic.id)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- CREATE TOPIC MODAL -->
+    <div class="modal fade show d-block" *ngIf="showCreateTopicModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title">
+              {{ editingTopicId ? 'Edit Topic' : 'Create Topic' }}
+            </h5>
+            <button type="button" class="btn-close" (click)="closeTopicModal()"></button>
+          </div>
+
+          <div class="modal-body">
+            <form #topicFormRef="ngForm" (ngSubmit)="saveTopic()">
+
+              <div class="mb-3">
+                <label class="form-label">Topic name</label>
+                <input type="text" class="form-control" name="name" required [(ngModel)]="topicForm.name">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Content</label>
+                <textarea class="form-control" rows="4" name="content" required [(ngModel)]="topicForm.content">
+            </textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" [disabled]="!topicFormRef.valid">
+
+                {{ editingTopicId ? 'Save Changes' : 'Create' }}
+
+              </button>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>

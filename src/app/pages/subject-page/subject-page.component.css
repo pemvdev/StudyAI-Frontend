@@ -1,0 +1,6 @@
+.content-preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;   /* number of lines visible */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
