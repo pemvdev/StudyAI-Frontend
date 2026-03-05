@@ -24,7 +24,11 @@
           >Classrooms</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">AI Quiz</a>
+          <a class="nav-link"
+          routerLink="/quizzes"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true}"
+          >AI Quiz</a>
         </li>
         <li class="nav-item">
           <a class="nav-link">Settings</a>

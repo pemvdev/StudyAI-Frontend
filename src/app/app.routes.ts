@@ -8,6 +8,9 @@ import { ClassroomsPageComponent } from './pages/classroom-page/classroom-page.c
 import { ClassroomSpecificPageComponent } from './pages/classroom-specific-page/classroom-specific-page.component';
 import { Component } from '@angular/core';
 import { SubjectPageComponent } from './pages/subject-page/subject-page.component';
+import { QuizPageComponent } from './pages/quiz-page/quiz-page.component';
+import { GenerateQuizPageComponent } from './pages/generate-quiz-page/generate-quiz-page.component';
+import { QuizzComponent } from './components/quizz/quizz.component';
 
 export const routes: Routes = [
     {
@@ -51,25 +54,20 @@ export const routes: Routes = [
         canActivate: [authGuard] 
         //Page specific to the subject selected (Topics listed here)
     },
+    {
+        path: "quizzes",
+        component:QuizPageComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: "quizzes/new",
+        component: GenerateQuizPageComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: "quizzes/:id",
+        component:QuizzComponent,
+        canActivate: [authGuard]
+    },
     
-    
-    // {
-    //     path: "quizz",
-    //     //component:,
-    //     canActivate: [authGuard]
-    // },
-
-
-
-    //  {
-    //     path: "classrooms",
-    //     component: 
-    //     canActivate: [authGuard]
-    // },
-
-    //  {
-    //     path: "study",
-    //     component: 
-    //     canActivate: [authGuard]    
-    // }
 ];

@@ -1,0 +1,79 @@
+<div class="container py-5" *ngIf="quiz && !quizFinished">
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-body p-4">
+
+          <!-- Progress -->
+          <div class="mb-4">
+            <div class="d-flex justify-content-between">
+              <small class="text-muted">
+                Pergunta {{ currentQuestionIndex + 1 }} de {{ quiz.questions.length }}
+              </small>
+              <small class="text-muted">
+                {{ ((currentQuestionIndex + 1) / quiz.questions.length * 100) | number:'1.0-0' }}%
+              </small>
+            </div>
+
+            <div class="progress mt-2" style="height: 8px;">
+              <div class="progress-bar bg-primary" role="progressbar"
+                [style.width.%]="(currentQuestionIndex + 1) / quiz.questions.length * 100">
+              </div>
+            </div>
+          </div>
+
+          <!-- Question -->
+          <h4 class="fw-bold mb-4">
+            {{ currentQuestion?.questionText }} 
+          </h4>
+
+          <!-- Options -->
+          <div class="list-group">
+
+            <button *ngFor="let option of currentQuestion?.options; let i = index" type="button"
+              class="list-group-item list-group-item-action rounded-3 mb-2" [ngClass]="{
+                'active': isSelected(i)
+              }" (click)="selectOption(i)">
+              {{ option }}
+            </button>
+
+          </div>
+
+          <!-- Navigation -->
+          <div class="d-flex justify-content-between mt-4">
+
+            <button class="btn btn-outline-secondary px-4" (click)="previousQuestion()"
+              [disabled]="currentQuestionIndex === 0">
+              ← Voltar
+            </button>
+
+            <button *ngIf="currentQuestionIndex < quiz.questions.length - 1" class="btn btn-primary px-4"
+              (click)="nextQuestion()">
+              Próxima →
+            </button>
+
+            <button *ngIf="currentQuestionIndex === quiz.questions.length - 1" class="btn btn-success px-4"
+              (click)="finishQuiz()">
+              Finalizar Quiz
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Finished State -->
+<div class="container py-5 text-center" *ngIf="quizFinished">
+  <div class="card shadow-lg border-0 rounded-4 p-5">
+    <h2 class="fw-bold text-success mb-3">Quiz enviado!</h2>
+    <div class="spinner-border text-primary mb-3" role="status"></div>
+    <p class="text-muted">Calculando resultado...</p>
+  </div>
+</div>

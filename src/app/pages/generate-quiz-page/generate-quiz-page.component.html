@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+
+<div class="card p-4 shadow-sm mt-4">
+
+  <h4 class="fw-bold mb-4">Generate New Quiz</h4>
+
+  <div class="row g-3">
+
+    <div class="col-md-4">
+      <label class="form-label">Class</label>
+
+      <select class="form-select"
+              [(ngModel)]="selectedClassId"
+              (change)="onClassChange()">
+
+        <option value="">Select Class</option>
+
+        <option *ngFor="let c of classes" [value]="c.id">
+          {{ c.name }}
+        </option>
+
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Subject</label>
+
+      <select class="form-select"
+              [(ngModel)]="selectedSubjectId"
+              (change)="onSubjectChange()"
+              [disabled]="!subjects.length">
+
+        <option value="">Select Subject</option>
+
+        <option *ngFor="let s of subjects" [value]="s.id">
+          {{ s.name }}
+        </option>
+
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Topic</label>
+
+      <select class="form-select"
+              [(ngModel)]="selectedTopicId"
+              [disabled]="!topics.length">
+
+        <option value="">Select Topic</option>
+
+        <option *ngFor="let t of topics" [value]="t.id">
+          {{ t.name }}
+        </option>
+
+      </select>
+    </div>
+
+  </div>
+
+  <div class="mt-4 d-flex gap-2">
+
+    <button class="btn btn-success"
+            (click)="generateQuiz()"
+            [disabled]="!selectedTopicId || loading">
+
+      Generate Quiz
+
+    </button>
+
+    <!-- <button class="btn btn-outline-secondary"
+            (click)="showGenerator = false">
+
+      Cancel
+
+    </button> -->
+
+  </div>
+
+</div>
+
+<!-- <div *ngIf="loading">
+  <p>Loading quiz...</p>
+</div>
+
+<div *ngIf="errorMessage">
+  <p>{{ errorMessage }}</p>
+</div>
+
+<div *ngIf="!loading && quiz && !result">
+  <app-quizz [quiz]="quiz" (quizCompleted)="onQuizCompleted($event)">
+  </app-quizz>
+</div>
+
+<div *ngIf="result">
+  <h2>Resultado Final</h2>
+  <p>Nota: {{ result.score }}</p>
+  <p>Acertos: {{ result.correctAnswers }}</p>
+  <p>Total de questões: {{ result.totalQuestions }}</p>
+</div> -->
