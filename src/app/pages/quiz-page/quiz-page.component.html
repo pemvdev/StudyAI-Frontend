@@ -1,76 +1,97 @@
 <app-navbar></app-navbar>
 
+<div class="quiz-page">
+
 <div class="container py-5">
 
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold">My Quizzes</h2>
-    <button class="btn btn-primary" routerLink="/quizzes/new">
+  <div class="d-flex justify-content-between align-items-center mb-5">
+
+    <div>
+      <h2 class="fw-bold mb-1">My Quizzes</h2>
+      <p class="text-muted mb-0">Review your past quizzes and track progress</p>
+    </div>
+
+    <button class="btn btn-primary new-quiz-btn" routerLink="/quizzes/new">
       + New Quiz
     </button>
+
   </div>
 
   <!-- Caso não tenha quizzes -->
-  <div *ngIf="!quizzes || quizzes.length === 0" 
-       class="text-center text-muted py-5">
-    <h5>No quizzes found</h5>
-    <p>Generate your first quiz to get started.</p>
+  <div *ngIf="!quizzes || quizzes.length === 0"
+       class="text-center empty-state py-5">
+
+    <h5 class="fw-semibold mb-2">No quizzes found</h5>
+    <p class="text-muted">Generate your first AI quiz to start learning.</p>
+
   </div>
 
-  <!-- Lista de quizzes -->
+  <!-- Lista -->
   <div class="row g-4" *ngIf="quizzes && quizzes.length > 0">
 
     <div class="col-md-6 col-lg-4" *ngFor="let quiz of quizzes">
 
-      <div class="card shadow-sm border-0 rounded-4 h-100">
+      <div class="card quiz-card h-100">
 
         <div class="card-body d-flex flex-column">
 
           <!-- Header -->
           <div class="mb-3">
+
             <h5 class="fw-bold mb-1">
               Quiz #{{ quiz.id }}
             </h5>
+
             <small class="text-muted">
-              Created on {{ quiz.createdAt }}
+              Created on {{ quiz.createdAt | date: 'mediumDate'}}
             </small>
+
           </div>
 
-          <!-- Informações -->
-          <div class="mb-3">
+          <!-- Info -->
+          <div class="mb-4">
 
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-center">
+
               <span class="text-muted">Score</span>
-              <span class="fw-bold text-primary">
-                {{ quiz.score }} / {{ quiz.totalQuestions }}
+
+              <span class="score-badge">
+                {{ quiz.score }}%
               </span>
+
             </div>
 
             <div class="d-flex justify-content-between mt-2">
-              <span class="text-muted">Total Questions  </span>
-              <span class="fw-bold">
+
+              <span class="text-muted">Total Questions</span>
+
+              <span class="fw-semibold">
                 {{ quiz.totalQuestions }}
               </span>
+
             </div>
 
           </div>
 
-          <!-- Progress visual -->
-          <div class="progress mb-4" style="height: 8px;">
-            <div
-              class="progress-bar bg-success"
-              role="progressbar"
-              [style.width.%]="(quiz.questions.length / quiz.totalQuestions) * 100">
+          <!-- Progress -->
+          <div class="progress quiz-progress mb-4">
+
+            <div class="progress-bar"
+                 role="progressbar"
+                 [style.width.%]="(quiz.questions.length / quiz.totalQuestions) * 100">
             </div>
+
           </div>
 
-          <!-- Botões -->
+          <!-- Buttons -->
           <div class="mt-auto d-flex justify-content-between">
 
-            <button class="btn btn-outline-secondary btn-sm">
+            <button class="btn btn-light btn-sm">
               View Details
             </button>
 
-            <button class="btn btn-success btn-sm" routerLink="/quizzes/{{ quiz.id }}">
+            <button class="btn btn-primary btn-sm"
+                    routerLink="/quizzes/{{ quiz.id }}">
               Retake Quiz
             </button>
 
@@ -86,5 +107,4 @@
 
 </div>
 
-
-
+</div>

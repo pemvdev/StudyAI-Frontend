@@ -13,6 +13,7 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
+  background-color: #f3f4f6;
 }
 
 @media (max-width: 992px) {
