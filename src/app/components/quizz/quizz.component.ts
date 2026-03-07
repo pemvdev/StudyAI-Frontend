@@ -3,8 +3,7 @@ import { Quizz } from "./quizz.model";
 import { QuizSubmission } from "./quiz-submission.model";
 import { CommonModule } from '@angular/common';
 import { QuizzService } from '../../services/quizz.service';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-quizz',
   standalone: true,
@@ -18,13 +17,15 @@ export class QuizzComponent implements OnInit {
 
   loading = false;
   errorMessage: string | null = null;
-
-  @Output() quizCompleted = new EventEmitter<QuizSubmission>();
+  quizResult: any = null;
+  submitting = false;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private quizService: QuizzService
-  ) {}
+
+  ) { }
 
   ngOnInit(): void {
 
@@ -116,8 +117,43 @@ export class QuizzComponent implements OnInit {
       }))
     };
 
-    this.quizCompleted.emit(submission);
-    this.quizFinished = true;
+    this.submitting = true;
+
+    this.quizService.submitQuiz(this.quiz.id, submission).subscribe({
+      next: result => {
+        this.quizResult = result;
+        this.quizFinished = true;
+        this.submitting = false;
+      },
+      error: () => {
+        this.errorMessage = "Error submitting quiz";
+        this.submitting = false;
+      }
+    });
+
+    this.quizService.submitQuiz(this.quiz.id, submission).subscribe({
+      next: result => {
+        console.log("Quiz result:", result);
+        this.quizFinished = true;
+      },
+      error: () => {
+        this.errorMessage = "Error submitting quiz";
+      }
+    });
+  }
+
+  restartQuiz() {
+
+    if (!this.quiz) return;
+
+    this.currentQuestionIndex = 0;
+    this.selectedAnswers = {};
+    this.quizFinished = false;
+    this.quizResult = null;
+  }
+
+  goHome() {
+    this.router.navigate(['/quizzes']);
   }
 
 }

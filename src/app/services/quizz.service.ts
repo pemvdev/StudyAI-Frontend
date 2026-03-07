@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Quizz } from '../components/quizz/quizz.model';
 import { QuizSubmission } from '../components/quizz/quiz-submission.model';
 import { map } from 'rxjs/operators';
+import { QuizResult } from '../components/quizz/quiz-result.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,11 @@ export class QuizzService {
     });
   }
 
-  submitQuiz(submission: QuizSubmission): Observable<any> {
-    return this.http.post(`${this.apiUrl}/submit`, submission);
-  }
+  submitQuiz(quizId: number, submission: QuizSubmission): Observable<QuizResult> {
+  return this.http.post<QuizResult>(
+    `${this.apiUrl}/${quizId}/submit`,
+    submission
+  );
 }
+}
+

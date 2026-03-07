@@ -112,7 +112,7 @@ export class GenerateQuizPageComponent implements OnInit {
   }
 
   onQuizCompleted(submission: QuizSubmission) {
-    this.quizService.submitQuiz(submission).subscribe({
+    this.quizService.submitQuiz(this.quizId, submission).subscribe({
       next: (response) => {
         this.result = response;
       },
