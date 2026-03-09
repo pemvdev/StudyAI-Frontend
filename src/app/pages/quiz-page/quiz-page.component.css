@@ -1,12 +1,14 @@
 .quiz-page{
   min-height:100vh;
-  background:#f8fafc;
+  background: var(--bg-primary);
 }
 
 /* card */
 
 .quiz-card{
-  border:none;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border:1px solid var(--border-color);
   border-radius:16px;
   box-shadow:0 6px 20px rgba(0,0,0,0.05);
   transition: all 0.25s ease;
@@ -22,18 +24,18 @@
 .quiz-progress{
   height:8px;
   border-radius:8px;
-  background:#eef2f7;
+  background: var(--hover-bg);
 }
 
 .quiz-progress .progress-bar{
-  background:linear-gradient(90deg,#0d6efd,#4f46e5);
+  background: var(--accent-color);
 }
 
 /* score badge */
 
 .score-badge{
-  background:#e7f1ff;
-  color:#0d6efd;
+  background: var(--hover-bg);
+  color: var(--accent-color);
   font-weight:600;
   padding:4px 10px;
   border-radius:8px;
@@ -51,4 +53,5 @@
 
 .empty-state{
   opacity:0.8;
+  color: var(--text-secondary);
 }

@@ -1,11 +1,15 @@
 <nav class="navbar navbar-expand-lg study-navbar">
   <div class="container-fluid">
 
+    <!-- LOGO -->
     <a class="navbar-brand fw-bold brand-logo" routerLink="/home">
       Study<span class="ai-text">AI</span>
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+    <!-- MOBILE BUTTON -->
+    <button class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
       data-bs-target="#navbarNav"
       aria-controls="navbarNav"
       aria-expanded="false"
@@ -14,8 +18,10 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- NAVBAR CONTENT -->
     <div class="collapse navbar-collapse" id="navbarNav">
 
+      <!-- LINKS -->
       <ul class="navbar-nav gap-lg-2">
 
         <li class="nav-item">
@@ -53,8 +59,27 @@
 
       </ul>
 
-      <div class="ms-auto d-flex align-items-center profile-wrapper">
-        <app-user-profile></app-user-profile>
+      <!-- RIGHT SIDE -->
+      <div class="ms-auto d-flex align-items-center gap-3">
+
+        <div class="ms-auto d-flex align-items-center gap-3">
+
+  <!-- THEME BUTTON -->
+  <button
+  class="btn btn-outline-secondary theme-toggle"
+  (click)="toggleTheme()">
+
+  <i class="bi" [ngClass]="isDark ? 'bi-sun' : 'bi-moon-stars'"></i>
+
+</button>
+
+  <!-- PROFILE -->
+  <div class="profile-wrapper">
+    <app-user-profile></app-user-profile>
+  </div>
+
+</div>
+
       </div>
 
     </div>

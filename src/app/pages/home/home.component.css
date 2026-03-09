@@ -2,29 +2,23 @@
   min-height:100vh;
   position:relative;
   overflow:hidden;
+  background: var(--bg-primary);
 }
 
-.ai-bg-image::before{
+/* efeito de luz de fundo */
+
+.dashboard-bg::before{
   content:"";
   position:absolute;
   inset:0;
-  background: radial-gradient(circle, rgba(13,110,253,0.08), transparent 70%);
+
+  background: radial-gradient(
+    circle,
+    rgba(13,110,253,0.08),
+    transparent 70%
+  );
+
   filter: blur(120px);
-  z-index:-1;
-}
-
-.ai-bg-image{
-  position:absolute;
-  right:-100px;
-  bottom:-100px;
-
-  width:520px;
-  height:520px;
-
-  background-image:url("/assets/ai-study-bg.png");
-  background-size:contain;
-  background-repeat:no-repeat;
-
-  opacity:0.05;
   pointer-events:none;
+  z-index:0;
 }

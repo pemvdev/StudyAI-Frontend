@@ -2,18 +2,193 @@
 @import 'ngx-toastr/toastr';
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-html, body {
+:root {
+  /* Light Theme */
+  --bg-primary: #f9fafc;
+  --bg-secondary: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --accent-color: #0d6efd;
+  --border-color: #e5e7eb;
+  --hover-bg: #f1f5f9;
+}
+
+/* Dark Theme */
+[data-bs-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5f5;
+  --accent-color: #60a5fa;
+  --border-color: #334155;
+  --hover-bg: #1e3a8a;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background 0.3s, color 0.3s;
+}
+
+
+.study-navbar {
+  backdrop-filter: blur(10px);
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.study-navbar .brand-logo .ai-text {
+  color: var(--accent-color);
+}
+
+.navbar-nav .nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.navbar-nav .nav-link.active {
+  background: var(--accent-color);
+  color: #fff;
+}
+
+/* Botão do tema */
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Profile */
+.profile-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.profile-wrapper:hover {
+  transform: scale(1.05);
+  border-color: var(--accent-color);
+}
+
+.card {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  background-color: var(--hover-bg);
+}
+
+.card-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.card-text {
+  color: var(--text-secondary);
+}
+
+.card-footer {
+  color: var(--accent-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.card-footer:hover {
+  opacity: 0.8;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+  filter: brightness(0.9);
+}
+
+.btn-outline-primary {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+input, select, textarea {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: all 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.modal-content {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+
+a:hover {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  background-color: #f3f4f6;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
 }
 
 @media (max-width: 992px) {
@@ -27,5 +202,16 @@ html, body {
 
   section.text-bg-dark {
     display: none;
+  }
+
+  /* transição de tema */
+  *,
+  *::before,
+  *::after {
+    transition:
+      background-color 1.00s ease,
+      color 0.1.00s ease,
+      border-color 1.00s ease,
+      box-shadow 1.00s ease;
   }
 }
