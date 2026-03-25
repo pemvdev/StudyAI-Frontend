@@ -1,0 +1,8 @@
+<div class="profile-container" (click)="toggleDropdown()">
+  <img src="/assets/default-profile-picture.svg" class="profile-picture">
+
+  <div class="profile-dropdown" *ngIf="isOpen"> <a routerLink="/profile" class="dropdown-item" (click)="isOpen = false">Profile</a>
+    <a routerLink="/settings" class="dropdown-item" (click)="isOpen = false">Settings</a>
+    <button class="dropdown-item" (click)="logout()">Logout</button>
+  </div>
+</div>

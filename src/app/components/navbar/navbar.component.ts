@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfileComponent } from "../user-profile/user-profile.component";
-import { RouterModule } from "@angular/router";
+import { RouterModule, Router } from "@angular/router";
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [UserProfileComponent, RouterModule, CommonModule ],
+  imports: [RouterModule, CommonModule ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
   isDark = false
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
 
@@ -32,5 +33,10 @@ export class NavbarComponent implements OnInit {
   localStorage.setItem("theme", html.getAttribute('data-bs-theme') || "light")
   this.isDark = html.getAttribute('data-bs-theme') === 'dark'
 }
+
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
 
 }

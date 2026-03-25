@@ -74,8 +74,16 @@
 </button>
 
   <!-- PROFILE -->
-  <div class="profile-wrapper">
-    <app-user-profile></app-user-profile>
+  <div class="dropdown">
+    <button class="btn btn-outline-secondary profile-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-person-circle"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+      <li><a class="dropdown-item" routerLink="/settings">Settings</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" (click)="logout()">Logout <i class="bi bi-box-arrow-right px-2"></i></button></li>
+    </ul>
   </div>
 
 </div>
