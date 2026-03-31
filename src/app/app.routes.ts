@@ -11,6 +11,7 @@ import { SubjectPageComponent } from './pages/subject-page/subject-page.componen
 import { QuizPageComponent } from './pages/quiz-page/quiz-page.component';
 import { GenerateQuizPageComponent } from './pages/generate-quiz-page/generate-quiz-page.component';
 import { QuizzComponent } from './components/quizz/quizz.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 export const routes: Routes = [
     {
@@ -67,6 +68,12 @@ export const routes: Routes = [
     {
         path: "quizzes/:id",
         component:QuizzComponent,
+        canActivate: [authGuard]
+    },
+
+    {
+        path: "profile",
+        component: ProfilePageComponent,
         canActivate: [authGuard]
     },
     

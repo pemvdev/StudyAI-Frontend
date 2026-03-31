@@ -1,10 +1,25 @@
- <img src="/assets/default-profile-picture.svg" style="width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;">
+<div class="profile-container">
 
-  <div class="profile-container">
+  <!-- FOTO -->
+  <div class="avatar">
+    <img [src]="user?.profilePicture || '/assets/default-profile-picture.svg'">
+  </div>
 
-    <img src="/assets/default-profile-picture.svg">
-    
+  <!-- VISUALIZAÇÃO -->
+  <div *ngIf="!isEditing">
+    <h3>{{ user?.name }}</h3>
+    <p>{{ user?.email }}</p>
+
+    <button (click)="startEdit()">Edit</button>
+  </div>
+
+  <!-- EDIÇÃO -->
+  <div *ngIf="isEditing">
+    <input type="text" [(ngModel)]="editUser.name">
+    <input type="email" [(ngModel)]="editUser.email">
+
+    <button (click)="save()">Save</button>
+    <button (click)="cancel()">Cancel</button>
+  </div>
+
 </div>

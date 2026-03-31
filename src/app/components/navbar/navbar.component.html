@@ -7,13 +7,8 @@
     </a>
 
     <!-- MOBILE BUTTON -->
-    <button class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,27 +20,20 @@
       <ul class="navbar-nav gap-lg-2">
 
         <li class="nav-item">
-          <a class="nav-link"
-            routerLink="/home"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true}">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true}">
             Home
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link"
-            routerLink="/classrooms"
-            routerLinkActive="active"
+          <a class="nav-link" routerLink="/classrooms" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true}">
             Classrooms
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link"
-            routerLink="/quizzes"
-            routerLinkActive="active"
+          <a class="nav-link" routerLink="/quizzes" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true}">
             AI Quiz
           </a>
@@ -64,29 +52,38 @@
 
         <div class="ms-auto d-flex align-items-center gap-3">
 
-  <!-- THEME BUTTON -->
-  <button
-  class="btn btn-outline-secondary theme-toggle"
-  (click)="toggleTheme()">
+          <!-- THEME BUTTON -->
+          <button class="btn btn-outline-secondary theme-toggle" (click)="toggleTheme()">
 
-  <i class="bi" [ngClass]="isDark ? 'bi-sun' : 'bi-moon-stars'"></i>
+            <i class="bi" [ngClass]="isDark ? 'bi-sun' : 'bi-moon-stars'"></i>
 
-</button>
+          </button>
 
-  <!-- PROFILE -->
-  <div class="dropdown">
-    <button class="btn btn-outline-secondary profile-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="bi bi-person-circle"></i>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end">
-      <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-      <li><a class="dropdown-item" routerLink="/settings">Settings</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><button class="dropdown-item text-danger" (click)="logout()">Logout <i class="bi bi-box-arrow-right px-2"></i></button></li>
-    </ul>
-  </div>
+          <!-- PROFILE -->
+          <div class="dropdown">
+            <button class="btn profile-btn dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
 
-</div>
+              <img *ngIf="user?.profilePicture; else defaultIcon" [src]="'http://localhost:8080' + user.profilePicture"
+                class="navbar-avatar">
+
+              <ng-template #defaultIcon>
+                <i class="bi bi-person-circle"></i>
+              </ng-template>
+
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+              <li><a class="dropdown-item" routerLink="/settings">Settings</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><button class="dropdown-item text-danger" (click)="logout()">Logout <i
+                    class="bi bi-box-arrow-right px-2"></i></button></li>
+            </ul>
+          </div>
+
+        </div>
 
       </div>
 

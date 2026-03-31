@@ -1,0 +1,93 @@
+<div class="profile-page">
+
+  <!-- HEADER -->
+  <div class="d-flex align-items-center gap-2 mb-3">
+    <button class="btn btn-outline-secondary btn-sm " (click)="goBack()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+
+    <div>
+      <h1 class="mb-0">My Profile</h1>
+      <p class="mb-0 text-muted">Manage your personal information</p>
+    </div>
+  </div>
+
+  <!-- PROFILE CARD -->
+  <div class="profile-card text-center d-flex flex-column center align-items-center">
+
+    <div class="d-flex flex-column align-items-center">
+
+      <!-- AVATAR -->
+      <div class="avatar-wrapper mb-3" (click)="fileInput.click()">
+        <img 
+          [src]="'http://localhost:8080' + user?.profilePicture" 
+          class="avatar-img"
+        >
+
+        <div class="avatar-overlay">
+          <i class="bi bi-camera"></i>
+          <span>Change</span>
+        </div>
+      </div>
+
+      <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
+
+      <!-- USER INFO -->
+      <h2 class="mb-1">{{ user?.name }}</h2>
+      <p class="text-muted mb-4">{{ user?.email }}</p>
+
+      <!-- STATS MOCK-->
+      <div class="d-flex justify-content-center gap-4 flex-wrap">
+
+        <div class="stat-box">
+          <h4>{{ stats.quizzes }}</h4>
+          <span>Quizzes</span>
+        </div>
+
+        <div class="stat-box">
+          <h4>{{ stats.accuracy }}%</h4>
+          <span>Accuracy</span>
+        </div>
+
+        <div class="stat-box">
+          <h4>{{ stats.trophies }}</h4>
+          <span>Trophies</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- EDIT SECTION -->
+  <div class="profile-card mt-4 d-flex  flex-column">
+
+    <h4 class="mb-3">Edit Profile</h4>
+
+    <div class="edit-form">
+
+      <input 
+        type="text" 
+        [(ngModel)]="user.name" 
+        placeholder="Name"
+        class="form-control mb-2"
+      >
+
+      <input 
+        type="email" 
+        [(ngModel)]="user.email" 
+        placeholder="Email"
+        class="form-control mb-3"
+      >
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary" (click)="save()">Save</button>
+        <button class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
